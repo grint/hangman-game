@@ -26,11 +26,7 @@ class HangmanController {
 		this.canvasContext;
 
 		// order of drawing hangman's parts, starting from the last
-<<<<<<< HEAD
 		this.drawSteps = ['legs', 'arms', 'body', 'frame2', 'frame1'];
-=======
-		this.drawSteps = ['rightLeg', 'leftLeg', 'rightArm', 'leftArm', 'torso', 'head', 'frame4', 'frame3', 'frame2', 'frame1'];
->>>>>>> c983d933b77f5940816896e4590d56b3dcd0c915
 	}
 
 	/**
@@ -41,11 +37,7 @@ class HangmanController {
 	$onInit() {
 		// Start parameters
 		this.sharedUser.isPlaying = true;
-<<<<<<< HEAD
 		this.sharedUser.lives = 5;
-=======
-		this.sharedUser.lives = 10;
->>>>>>> c983d933b77f5940816896e4590d56b3dcd0c915
 		this.game.chosenWord = this.words[Math.floor(Math.random() * this.words.length)].replace(/\s/g, "-");
 		this.game.guesses = [];
 		this.game.counter = 0;
@@ -154,12 +146,7 @@ class HangmanController {
 	 * stop game and add winning to the user winnings
 	 */
 	showMessage() {
-<<<<<<< HEAD
 		this.$scope.message = "You have " + this.sharedUser.lives + (this.sharedUser.lives == 1 ? " live" : " lives");
-=======
-		this.$scope.message = "You have " + this.sharedUser.lives + " lives";
->>>>>>> c983d933b77f5940816896e4590d56b3dcd0c915
-
 		// Game over
 		if (this.sharedUser.lives < 1) {
 			this.$scope.message = "Game Over";
@@ -226,7 +213,6 @@ class HangmanController {
 
 	frame1() {
 		this.drawLine(0, 150, 150, 150);
-<<<<<<< HEAD
 		this.drawLine(10, 0, 10, 600);
 	};
 
@@ -248,44 +234,6 @@ class HangmanController {
 	legs() {
 		this.drawLine(60, 70, 30, 110); // lett leg
 		this.drawLine(60, 70, 90, 110); // right leg
-=======
-	};
-
-	frame2() {
-		this.drawLine(10, 0, 10, 600);
-	};
-
-	frame3() {
-		this.drawLine(0, 5, 70, 5);
-	};
-
-	frame4() {
-		this.drawLine(60, 5, 60, 15);
-	};
-
-	torso() {
-		this.drawLine(60, 36, 60, 70);
-	};
-
-	head() {
-		this.drawCircle(60, 25, 10, 0);
-	}
-
-	rightArm() {
-		this.drawLine(60, 46, 95, 60);
-	};
-
-	leftArm() {
-		this.drawLine(60, 46, 25, 60);
-	};
-
-	rightLeg() {
-		this.drawLine(60, 70, 90, 110);
-	};
-
-	leftLeg() {
-		this.drawLine(60, 70, 30, 110);
->>>>>>> c983d933b77f5940816896e4590d56b3dcd0c915
 	};
 }
 
