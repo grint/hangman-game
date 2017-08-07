@@ -14,7 +14,7 @@ The game continues until:
 * the word/phrase is guessed (all letters are revealed) – WINNER or,
 * all the parts of the hangman are displayed – LOSER
 
-The final score will be calculated based on the rest lives: 10 * lives and addad to the total user's score.
+The final score will be calculated based on the rest user's lives: 10 * lives, and added to the total user's score.
 
 ![Game Screenshot](https://github.com/grint/hangman-game/blob/master/src/img/game_screenshot.png)
 
@@ -27,7 +27,7 @@ The final score will be calculated based on the rest lives: 10 * lives and addad
 git clone https://github.com/grint/hangman-game.git hangman-game
 cd hangman-game
 
-# Install the dependencies with npm**
+# Install the dependencies with npm
 npm install
 
 # Run production server
@@ -57,27 +57,27 @@ hangman-game/
  │   │
  |   ├──app.html                   * Placeholder for the content to load by UI-Router
  │   │
- │   components/                   *  All components of the application
+ │   components/                   * All components of the application
  │   │   ├──components.js          * Loads all needed components
  │   │   ├──component-name/        * Stores all files of a component
- │   │   ├──name.component.js      * bind template and controller
- │   │   ├────name.controller.js   * controller with constructor and methods of the component
+ │   │   ├────name.component.js    * Binds template and controller
+ │   │   ├────name.controller.js   * Controller with constructor and methods of the component
  │   │   ├────name.html            * HTML template of the component
  │   │   ├────name.js              * Generates module
  │   │   └────name.scss            * Component's specific stylesheets
  │   │
  │   common/                       * Shared parts used in multiple components
  │   │   common.js                 * Loads all parts
- │   │   └──component-name/        * Same components structure as in components/
+ │   │   └──component-name/        * Same components structure as in "components/"
  │   │
- │   ├──css/                       * all global stylesheets are served here
- │   ├──img/                       * static images are served here
- │   └──scripts/                   * static scripts are served here
+ │   ├──css/                       * All global stylesheets are served here
+ │   ├──img/                       * Static images are served here
+ │   └──scripts/                   * Static scripts are served here
  │
- ├──.babelrc                       * version of JS to generate with Babel
- ├──postcss.config.js              * settings for PostCSS package
- ├──package.json                   * what npm uses to manage it's dependencies
- └──webpack.config.js              * webpack main configuration file
+ ├──.babelrc                       * Version of JS to generate with Babel
+ ├──postcss.config.js              * Settings for PostCSS package
+ ├──package.json                   * What npm uses to manage it's dependencies
+ └──webpack.config.js              * Webpack main configuration file
 ```
 
 # Tech Stack
@@ -136,7 +136,7 @@ Reference: [https://www.npmjs.com/package/css-loader](https://www.npmjs.com/pack
 PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from "Can I Use".  
 Reference: [https://github.com/postcss/autoprefixer](https://github.com/postcss/autoprefixer)
 
-**postcss-loader****  
+**postcss-loader**  
 Postprocess CSS with PostCSS plugins.  
 Reference: [https://github.com/postcss/postcss-loader](https://github.com/postcss/postcss-loader)
 
@@ -188,3 +188,4 @@ Reference: [http://showdownjs.github.io/showdown](http://showdownjs.github.io/sh
 * Securely sign up and log in with password
 * User account page with individual scores and data
 * Include JS functions documentation to component docs
+* Bug fixing
