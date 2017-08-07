@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" charset="utf-8">
+    <title>mr-doc</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/cayman.min.css">
+    <link rel="stylesheet" href="../css/prism.min.css">
+    <link rel="stylesheet" href="../css/index.min.css">
+    <link rel="stylesheet" href="../css/docs.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container"><a class="brand">Mr. Doc</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right sponsored"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header id="overview" class="jumbotron subhead">
+      <div class="container">
+        <h1>mr-doc</h1>
+        <p class="lead"></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav affix-top">
+            <li><a href="../index.html">Main</a></li>
+            <li><a href="../components.js.html">components.js</a></li>
+            <li><a href="../docs/config.js.html">docs/config.js</a></li>
+            <li><a href="../docs/docs.component.js.html">docs/docs.component.js</a></li>
+            <li><a href="../docs/docs.controller.js.html">docs/docs.controller.js</a></li>
+            <li><a href="../docs/docs.js.html">docs/docs.js</a></li>
+            <li><a href="../docs/run.js.html">docs/run.js</a></li>
+            <li><a href="../hangman/hangman.component.js.html">hangman/hangman.component.js</a></li>
+            <li class="active"><a href="../hangman/hangman.controller.js.html">hangman/hangman.controller.js</a></li>
+            <li><a href="../hangman/hangman.js.html">hangman/hangman.js</a></li>
+            <li><a href="../leaderboard/leaderboard.component.js.html">leaderboard/leaderboard.component.js</a></li>
+            <li><a href="../leaderboard/leaderboard.controller.js.html">leaderboard/leaderboard.controller.js</a></li>
+            <li><a href="../leaderboard/leaderboard.js.html">leaderboard/leaderboard.js</a></li>
+          </ul>
+          <div class="scrollspy">
+            <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#$onInit"><i class="alert alert-info"></i><span>$onInit</span></a>
+              </li>
+              <li><a href="#newGame"><i class="alert alert-info"></i><span>newGame</span></a>
+              </li>
+              <li><a href="#onWin"><i class="alert alert-info"></i><span>onWin</span></a>
+              </li>
+              <li><a href="#openLeaderboard"><i class="alert alert-info"></i><span>openLeaderboard</span></a>
+              </li>
+              <li><a href="#onLetterClick"><i class="alert alert-info"></i><span>onLetterClick</span></a>
+              </li>
+              <li><a href="#showMessage"><i class="alert alert-info"></i><span>showMessage</span></a>
+              </li>
+              <li><a href="#prepareHangmanCanvas"><i class="alert alert-info"></i><span>prepareHangmanCanvas</span></a>
+              </li>
+              <li><a href="#drawLine"><i class="alert alert-info"></i><span>drawLine</span></a>
+              </li>
+              <li><a href="#drawCircle"><i class="alert alert-info"></i><span>drawCircle</span></a>
+              </li>
+              <li><a href="#animate"><i class="alert alert-info"></i><span>animate</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <section id="$onInit">
+            <h1>$onInit</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>$onInit()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Init starting values when the game starts<br />Randomly choose a word to play<br />Set current user (add it to DB if not exists)</p></div>
+          <pre><code class="language-javascript">$onInit() {
+	// Start parameters
+	this.sharedUser.isPlaying = true;
+	this.sharedUser.lives = 10;
+	this.game.chosenWord = this.words[Math.floor(Math.random() * this.words.length)].replace(/\s/g, &quot;-&quot;);
+	this.game.guesses = [];
+
+	// Fill the hidden word filled with &quot;_&quot; by default according to the chosen word length
+	for (var i = 0; i &lt; this.game.chosenWord.length; i++) {
+		this.game.guesses[i] = '_';
+	}
+
+	// Show user lives and prepare hangman canvas
+	this.showMessage();
+	this.prepareHangmanCanvas();
+
+	console.log(this.game.chosenWord);
+}</code></pre>
+          <section id="newGame">
+            <h1>newGame</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>newGame()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Start a new game<br />and increase games count: it triggers directive &#39;refresher&#39;</p></div>
+          <pre><code class="language-javascript">newGame() {
+	this.$onInit();
+	this.$scope.gamesCount += 1;
+}</code></pre>
+          <section id="onWin">
+            <h1>onWin</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>onWin()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Actions if user won a game<br />Increase the no. ot user&#39;s winning in DB<br />Add scores for the game that depends on user&#39;s lives (lives * 10)<br />Stop game and set it to successful state<br />Show congratulations</p></div>
+          <pre><code class="language-javascript">onWin() {
+	this.$scope.message = &quot;You Win!&quot;;
+	this.sharedUser.isPlaying = false;
+	this.game.isSuccessful = true;
+
+	let that = this;
+	this.$localForage.getItem('users').then(function(users) {
+		var objIndex = users.findIndex((obj =&gt; obj.name == that.sharedUser.name));
+		users[objIndex].winnings += 1;
+		users[objIndex].score += that.sharedUser.lives * 10;
+		users[objIndex] = that.sharedUser;
+		that.$localForage.setItem('users', users);
+
+	}).catch(function(err) {
+		console.log(err);
+	});
+
+}</code></pre>
+          <section id="openLeaderboard">
+            <h1>openLeaderboard</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>openLeaderboard()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Go to the page with leaders sharing current user data (is the last game won, user name, etc.)</p></div>
+          <pre><code class="language-javascript">openLeaderboard() {
+	this.$state.go('leaderboard', {
+		obj: {
+			game: this.game,
+			user: this.sharedUser
+		}
+	});
+}</code></pre>
+          <section id="onLetterClick">
+            <h1>onLetterClick</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>onLetterClick()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>When user clicks on the letter it will be compared with all letters in the chosen word<br />If the letter is wrong - no. of user lives decreases and hangman is being drawed</p></div>
+          <pre><code class="language-javascript">onLetterClick($event, el) {
+	if (this.sharedUser.isPlaying &amp;&amp; !el.clicked) {
+		el.clicked = true;
+		$event.cancelBubble = true;
+		$event.stopPropagation();
+		$event.preventDefault();
+
+		// Try to find chosen letter in the word
+		for (var i = 0; i &lt; this.game.chosenWord.length; i++) {
+			if (this.game.chosenWord[i] === el.letter) {
+				this.game.guesses[i] = el.letter;
+				this.game.counter += 1;
+			}
+		}
+
+		// The letter is wrong ? lives--, draw hangman
+		if (this.game.chosenWord.indexOf(el.letter) === -1) {
+			this.sharedUser.lives -= 1;
+			this.showMessage();
+			this.animate();
+		} else {
+			this.showMessage();
+		}
+	}
+}</code></pre>
+          <section id="showMessage">
+            <h1>showMessage</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>showMessage()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Show message according to the game status,<br />stop game and add winning to the user winnings</p></div>
+          <pre><code class="language-javascript">showMessage() {
+	this.$scope.message = &quot;You have &quot; + this.sharedUser.lives + &quot; lives&quot;;
+
+	// Game over
+	if (this.sharedUser.lives &lt; 1) {
+		this.$scope.message = &quot;Game Over&quot;;
+	}
+
+	for (var i = 0; i &lt; this.game.guesses.length; i++) {
+		// Game is successful
+		if (this.game.counter === this.game.guesses.length) {
+			this.onWin();
+			break;
+		}
+	}
+}</code></pre>
+          <section id="prepareHangmanCanvas">
+            <h1>prepareHangmanCanvas</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>prepareHangmanCanvas()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>The function is called once on game start<br />Prepare canvas for the future hangman</p></div>
+          <pre><code class="language-javascript">prepareHangmanCanvas() {
+	var canvas = document.getElementById('hangmanCanvas');
+	this.canvasContext = canvas.getContext('2d');
+	this.canvasContext.clearRect(0, 0, 400, 400);
+	this.canvasContext.beginPath();
+	this.canvasContext.strokeStyle = &quot;#000&quot;;
+	this.canvasContext.lineWidth = 2;
+}</code></pre>
+          <section id="drawLine">
+            <h1>drawLine</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>drawLine()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>The function draws a line according to X and Y coordinates<br />$pathFromX {number}: starting X coordinate<br />$pathFromY {number}: starting Y coordinate<br />$pathToX {number}: end X coordinate<br />$pathToY {number}: end Y coordinate</p></div>
+          <pre><code class="language-javascript">drawLine($pathFromX, $pathFromY, $pathToX, $pathToY) {
+	this.canvasContext.moveTo($pathFromX, $pathFromY);
+	this.canvasContext.lineTo($pathToX, $pathToY);
+	this.canvasContext.stroke();
+}</code></pre>
+          <section id="drawCircle">
+            <h1>drawCircle</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>drawCircle()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>The function draws a circle according to X and Y coordinates<br />$pathFromX {number}: starting X coordinate<br />$pathFromY {number}: starting Y coordinate<br />$pathToX {number}: end X coordinate<br />$pathToY {number}: end Y coordinate</p></div>
+          <pre><code class="language-javascript">drawCircle($pathFromX, $pathFromY, $pathToX, $pathToY) {
+	this.canvasContext.beginPath();
+	this.canvasContext.arc($pathFromX, $pathFromY, $pathToX, $pathToY, Math.PI * 2, true);
+	this.canvasContext.stroke();
+}</code></pre>
+          <section id="animate">
+            <h1>animate</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>&nbsp;</span><span>animate()</span><span>&nbsp;</span>
+            </p>
+          </section>
+          <div class="description"><p>Draw chosen hangman&#39;s part according to the user&#39;s lives<br />Name of the corresponding function is taken from &quot;this.drawSteps&quot;<br />&quot;User.lives&quot; plays role of the array index</p></div>
+          <pre><code class="language-javascript">animate() {
+	var drawPart = this.drawSteps[this.sharedUser.lives];
+	eval('this.' + drawPart + '()');
+}
+
+
+frame1() {
+	this.drawLine(0, 150, 150, 150);
+};
+
+frame2() {
+	this.drawLine(10, 0, 10, 600);
+};
+
+frame3() {
+	this.drawLine(0, 5, 70, 5);
+};
+
+frame4() {
+	this.drawLine(60, 5, 60, 15);
+};
+
+torso() {
+	this.drawLine(60, 36, 60, 70);
+};
+
+head() {
+	this.drawCircle(60, 25, 10, 0);
+}
+
+rightArm() {
+	this.drawLine(60, 46, 95, 60);
+};
+
+leftArm() {
+	this.drawLine(60, 46, 25, 60);
+};
+
+rightLeg() {
+	this.drawLine(60, 70, 90, 110);
+};
+
+leftLeg() {
+	this.drawLine(60, 70, 30, 110);
+};
+}
+
+export default HangmanController;</code></pre>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p>Documentation generated with <a href="https://github.com/mr-doc/mr-doc">Mr. Doc </a> created by <a href="https://twitter.com/FGRibreau" data-show-count="false" class="twitter-follow-button">Francois-Guillaume Ribreau </a></p>
+        <p>Mr. Doc is sponsored by <a href="http://bringr.net/?btt" title="Outil d'analyse des réseaux sociaux" class="bringr">Bringr </a> and <a href="https://redsmin.com/?btt" title="Full Redis GUI" class="redsmin">Redsmin</a></p>
+        <p>Theme borrowed from Twitter Bootstrap</p>
+      </div>
+    </footer>
+    <script src="../js/twitter-widget.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap-transition.min.js"></script>
+    <script src="../js/bootstrap-scrollspy.min.js"></script>
+    <script src="../js/bootstrap-dropdown.min.js"></script>
+    <script src="../js/bootstrap-collapse.min.js"></script>
+    <script src="../js/bootstrap-affix.min.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <script src="../js/index.min.js"></script>
+  </body>
+</html>

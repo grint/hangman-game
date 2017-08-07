@@ -1,0 +1,34 @@
+// Brand colors (blue)
+// -----------------------------------------------------------------------
+$brand-primary:         	#829DBA;
+$brand-primary-lighter: 	#B4C6D9;
+$brand-primary-light:	 	#DFE9F4;
+$brand-primary-darker:		#153B63;
+$brand-primary-dark:		#0e2741;
+
+
+// Secondary colors (yellow)
+// -----------------------------------------------------------------------
+$brand-secondary-light:     #eaf98f;
+$brand-secondary-lighter:   #e60064;
+$brand-secondary:           #cb1257;
+$brand-secondary-darker:	#af1f4a;
+$brand-secondary-dark:	    #465104;
+
+
+// Gray colors
+// -----------------------------------------------------------------------
+$gray-lightest:			#DDE0E4;
+$gray-lighter:          #A1A7AF;
+$gray-light:            #69737F;
+$gray:                  #4A515A;
+$gray-dark:				#353a41;
+
+
+// Buttons
+// -----------------------------------------------------------------------
+$btn-primary-bg:                 $brand-primary-darker;
+
+$btn-secondary-color:            #fff;
+$btn-secondary-bg:               $brand-secondary;
+$btn-secondary-border:           $brand-secondary;

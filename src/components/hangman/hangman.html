@@ -1,0 +1,75 @@
+<main>
+	<h1 class="text-center mb-3">Hangman Game</h1>
+	<div class="card bg-faded" ng-hide="vm.sharedUser.isLogged">
+		<div class="card-block" ng-init="selectedTab = 1;">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" href="#" ng-class="{active: selectedTab == 1}" ng-click="selectedTab = 1;" role="tab">Sign Up</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" ng-class="{active: selectedTab == 2}" ng-click="selectedTab = 2;" role="tab">Login</a>
+				</li>
+			</ul>
+			<div class="tab-content" ng-show="selectedTab == 1">
+				<form id="newUserForm" name="newUserForm" class="mt-3" novalidate ng-submit="vm.sharedUser.createUser(newUserForm, vm.user)">
+					<div class="form-goup row" ng-class="{ 'has-error': newUserForm.username.$dirty && newUserForm.username.$error.required }">
+						<label class="col-sm-2 col-form-label">Username:</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="vm.user.name" name="username" placeholder="Type your username" ng-model-options="{ debounce: 250 }" required>
+								<span class="input-group-btn">
+									<button type="submit" ng-disabled="newUserForm.$invalid" class="btn btn-primary">Create</button>
+								</span>
+							</div>
+							<div class="alert alert-danger mt-2 mb-0" ng-show="newUserForm.$submitted && newUserForm.$userExists">
+								Username is already taken, choose another name or
+								<a href="" ng-click="selectedTab = 2;">log in</a>.
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="tab-content" ng-show="selectedTab == 2">
+				<form id="loginForm" name="loginForm" class="mt-3" novalidate ng-submit="vm.sharedUser.logIn(loginForm, vm.user)">
+					<div class="form-goup row" ng-class="{ 'has-error': loginForm.username.$dirty && loginForm.username.$error.required }">
+						<label class="col-sm-2 col-form-label">Username:</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="vm.user.name" name="username" placeholder="Type your username" ng-model-options="{ debounce: 250 }" required>
+								<span class="input-group-btn">
+									<button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Log in</button>
+								</span>
+							</div>
+							<div class="alert alert-danger mt-2 mb-0" ng-show="loginForm.$submitted && loginForm.$userNotExists">
+								User is not exists, check your username or
+								<a href="" ng-click="selectedTab = 1;">sign up</a>.
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="game" ng-show="vm.sharedUser.isLogged">
+		<p class="text-center">Click on the letter in the alphabet below to guess the word, or click "Hint" to get a hint. </p>
+		<refresher condition="gamesCount">
+			<div id="alphabet" class="d-flex justify-content-center flex-wrap">
+				<span class="btn btn-secondary" ng-repeat="letter in vm.alphabet" ng-click="vm.onLetterClick($event, this);" ng-class="this.clicked ? 'disabled': ''">{{ letter }}</span>
+			</div>
+		</refresher>
+		<div id="currentWord" class="d-flex flex-row justify-content-center">
+			<div class="letter" ng-repeat="letter in vm.game.guesses track by $index">{{ letter }}</div>
+		</div>
+		<div id="message">
+			<p>{{ vm.$scope.message }}</p>
+			<button type="submit" class="btn btn-primary" ng-if="vm.game.isSuccessful" ng-click="vm.openLeaderboard()">Open leaderboard</button>
+		</div>
+		<div id="hangman">
+			<canvas id="hangmanCanvas">Your browser doesn't support the HTML5 CANVAS tag.</canvas>
+		</div>
+		<div id="actions">
+			<button type="submit" class="btn btn-primary" ng-click="vm.sharedUser.logOut();">New user</button>
+			<button type="submit" class="btn btn-primary" ng-click="vm.newGame();">New game</button>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,15 @@
+<!-- {{ user = leaderboard._$state.params.obj.user; "" }} 
+{{ game = leaderboard._$state.params.obj.game; "" }} -->
+<main>
+	<div>
+		<h1>Leaderboard</h1>
+
+		<table class="table scores-table mt-3" ng-table="vm.tableParams">
+			<tr ng-repeat="(userid, userdata) in $data track by $index">
+				<td class="text-center" data-title="'Name'" sortable="'name'">{{ userdata.name }}</td>
+				<td class="text-center" data-title="'Winnings'" sortable="'winnings'">{{ userdata.winnings }}</td>
+				<td class="text-center" data-title="'Score'" sortable="'score'">{{ userdata.score }}</td>
+			</tr>
+		</table>
+	</div>
+</main>
