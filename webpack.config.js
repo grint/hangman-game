@@ -48,7 +48,7 @@ module.exports = function makeWebpackConfig() {
 
 		// Output path from the view of the page
 		// Uses webpack-dev-server in development
-		publicPath: isProd ? '/' : 'http://localhost:8080/',
+		publicPath: '/',
 
 		// Filename for entry points
 		filename: isProd ? '[name].js' : '[name].bundle.js',
@@ -222,7 +222,9 @@ module.exports = function makeWebpackConfig() {
 	 */
 	config.devServer = {
 		contentBase: './src',
-		stats: 'minimal'
+		stats: 'minimal',
+		inline: true,
+		port: process.env.PORT || 3000
 	};
 
 	return config;
