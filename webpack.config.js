@@ -224,7 +224,7 @@ module.exports = function makeWebpackConfig() {
 		contentBase: './src',
 		stats: 'minimal',
 		inline: true,
-		port: process.env.PORT || 3000
+		port: parseInt(process.env.PORT) || 3000
 	};
 
 	return config;
