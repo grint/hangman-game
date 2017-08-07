@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+	<div class="container">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" ui-sref="hangman">Hangman Game</a>
+		<div class="collapse navbar-collapse" id="navbar">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item" ui-sref-active="active">
+					<a class="nav-link" ui-sref="hangman">Play</a>
+				</li>
+				<li class="nav-item" ui-sref-active="active">
+					<a class="nav-link" ui-sref="leaderboard">Leaderboard</a>
+				</li>
+				<li class="nav-item" ui-sref-active="active">
+					<a class="nav-link" ui-sref="docs">Docs</a>
+				</li>
+			</ul>
+			<span class="navbar-text mr-1" ng-if="vm.sharedUser.isLogged">
+			  You are logged in as <strong>{{ vm.sharedUser.name }}</strong>
+			</span>
+			<span class="navbar-text" ng-if="vm.sharedUser.isLogged">
+				<a href="#" ng-click="vm.sharedUser.logOut()">Log out</a>
+			</span>
+		</div>
+	</div>
+</nav>

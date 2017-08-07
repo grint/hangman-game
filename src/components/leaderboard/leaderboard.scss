@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import '~bootstrap/scss/_utilities.scss';
+@import '../../css/variables.scss';
+
+.ng-table-pager {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ng-table-counts {
+	align-items: flex-start;
+
+	.btn {
+		color: $gray;
+		background-color: $white;
+		border-color: $gray-lightest;
+		cursor: pointer;
+	}
+}

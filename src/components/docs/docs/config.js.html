@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" charset="utf-8">
+    <title>mr-doc</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/cayman.min.css">
+    <link rel="stylesheet" href="../css/prism.min.css">
+    <link rel="stylesheet" href="../css/index.min.css">
+    <link rel="stylesheet" href="../css/docs.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container"><a class="brand">Mr. Doc</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right sponsored"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header id="overview" class="jumbotron subhead">
+      <div class="container">
+        <h1>mr-doc</h1>
+        <p class="lead"></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav affix-top">
+            <li><a href="../index.html">Main</a></li>
+            <li><a href="../components.js.html">components.js</a></li>
+            <li class="active"><a href="../docs/config.js.html">docs/config.js</a></li>
+            <li><a href="../docs/docs.component.js.html">docs/docs.component.js</a></li>
+            <li><a href="../docs/docs.controller.js.html">docs/docs.controller.js</a></li>
+            <li><a href="../docs/docs.js.html">docs/docs.js</a></li>
+            <li><a href="../docs/run.js.html">docs/run.js</a></li>
+            <li><a href="../hangman/hangman.component.js.html">hangman/hangman.component.js</a></li>
+            <li><a href="../hangman/hangman.controller.js.html">hangman/hangman.controller.js</a></li>
+            <li><a href="../hangman/hangman.js.html">hangman/hangman.js</a></li>
+            <li><a href="../leaderboard/leaderboard.component.js.html">leaderboard/leaderboard.component.js</a></li>
+            <li><a href="../leaderboard/leaderboard.controller.js.html">leaderboard/leaderboard.controller.js</a></li>
+            <li><a href="../leaderboard/leaderboard.js.html">leaderboard/leaderboard.js</a></li>
+          </ul>
+          <div class="scrollspy">
+            <ul class="nav nav-list bs-docs-sidenav affix-top">
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <div class="description"></div>
+          <pre><code class="language-javascript">// Canonical path provides a consistent path (i.e. always forward slashes) across different OSes
+var path = require('canonical-path');
+
+var Package = require('dgeni').Package;
+
+// Create and export a new Dgeni package called dgeni-example. This package depends upon
+// the jsdoc and nunjucks packages defined in the dgeni-packages npm module.
+var package = new Package('dgeni-example', [
+  require('dgeni-packages/jsdoc'),
+  require('dgeni-packages/nunjucks')
+])
+
+module.exports = package
+
+// Configure our dgeni-example package. We can ask the Dgeni dependency injector
+// to provide us with access to services and processors that we wish to configure
+.config(function(log, readFilesProcessor, templateFinder, writeFilesProcessor) {
+
+  // Set logging level
+  log.level = 'info';
+
+  // Specify the base path used when resolving relative paths to source and output files
+  readFilesProcessor.basePath = path.resolve(__dirname, '../..');
+
+  // Specify collections of source files that should contain the documentation to extract
+  readFilesProcessor.sourceFiles = [
+    {
+      // Process all js files in `src` and its subfolders ...
+      // include: 'src/**/*.js',
+      include: 'components/**/*.js',
+      // ... except for this one!
+      exclude: 'src/components/docs/',
+      // When calculating the relative path to these files use this as the base path.
+      // So `src/foo/bar.js` will have relative path of `foo/bar.js`
+      basePath: 'src'
+    }
+  ];
+
+  // Add a folder to search for our own templates to use when rendering docs
+  templateFinder.templateFolders.unshift(path.resolve(__dirname, 'templates'));
+
+  // Specify how to match docs to templates.
+  // In this case we just use the same static template for all docs
+  templateFinder.templatePatterns.unshift('common.template.html');
+
+  // Specify where the writeFilesProcessor will write our generated doc files
+  writeFilesProcessor.outputFolder  = 'src/components/docs/build';
+});</code></pre>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p>Documentation generated with <a href="https://github.com/mr-doc/mr-doc">Mr. Doc </a> created by <a href="https://twitter.com/FGRibreau" data-show-count="false" class="twitter-follow-button">Francois-Guillaume Ribreau </a></p>
+        <p>Mr. Doc is sponsored by <a href="http://bringr.net/?btt" title="Outil d'analyse des réseaux sociaux" class="bringr">Bringr </a> and <a href="https://redsmin.com/?btt" title="Full Redis GUI" class="redsmin">Redsmin</a></p>
+        <p>Theme borrowed from Twitter Bootstrap</p>
+      </div>
+    </footer>
+    <script src="../js/twitter-widget.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap-transition.min.js"></script>
+    <script src="../js/bootstrap-scrollspy.min.js"></script>
+    <script src="../js/bootstrap-dropdown.min.js"></script>
+    <script src="../js/bootstrap-collapse.min.js"></script>
+    <script src="../js/bootstrap-affix.min.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <script src="../js/index.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import '~bootstrap/scss/_utilities.scss';
+@import '../../css/variables.scss';
+
+#alphabet {
+		float: left;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		@extend .mb-5;
+
+		.btn {
+				cursor: pointer;
+				min-width: 46px;
+				@extend .mb-2;
+				@extend .mx-1;
+
+				&.disabled {
+						cursor: default;
+				}
+		}
+}
+
+#currentWord {
+		float: left;
+		width: 100%;
+		@extend .mb-4;
+
+		.letter {
+				@extend .mx-1;
+				@extend .px-2;
+				font-size: 1.6em;
+		}
+}
+
+#message {
+		text-align: center;
+		font-size: $font-size-lg;
+		@extend .mb-4;
+}
+
+#hangman {
+		text-align: center;
+		@extend .mb-5;
+
+		canvas {
+				border: $brand-secondary dashed 2px;
+				padding: 15px;
+				color: $brand-secondary;
+		}
+}
+
+#actions {
+		text-align: center;
+}

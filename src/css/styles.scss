@@ -1,0 +1,14 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    padding-top: 80px;
+}
+
+.navbar {
+	.container {
+		@include media-breakpoint-only(xs) { 
+			margin: 0;
+		}
+	}
+}
