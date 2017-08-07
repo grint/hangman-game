@@ -16,7 +16,7 @@ The game continues until:
 
 The final score will be calculated based on the rest lives: 10 * lives and addad to the total user's score.
 
-![Game Screenshot](img/game_screenshot.png)
+![Game Screenshot](https://github.com/grint/hangman-game/blob/master/src/img/game_screenshot.png)
 
 
 ### Usage
