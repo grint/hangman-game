@@ -30,7 +30,7 @@ cd hangman-game
 # Install the dependencies with npm
 npm install
 
-# Run production server
+# Run server
 npm start
 ```
 
