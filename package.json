@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "dev": "node node_modules/.bin/webpack-dev-server --history-api-fallback --inline --progress",
+    "dev": "webpack-dev-server --history-api-fallback --inline --progress",
     "start": "npm run dev",
     "docs": "node_modules/.bin/mr-doc -o ./src/components/docs/ -s ./src/components/"
   },
