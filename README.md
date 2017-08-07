@@ -8,7 +8,7 @@ Hangman is a classic paper and pencil game.  One player thinks of a word or phra
 
 If a player suggests a letter that occurs in the word, it will be filled in the blanks in the right places.
 
-If the word does not contain the suggested letter, the number of user's lives will be descreased by 1 from 10 to 0 for each wrong choice. Also each wrong choice will be animated with drawing of body parts to the gallows.
+If the word does not contain the suggested letter, the number of user's lives will be descreased by 1 from 5 to 0 for each wrong choice. Also each wrong choice will be animated with drawing of body parts to the gallows.
 
 The game continues until:
 * the word/phrase is guessed (all letters are revealed) – WINNER or,
