@@ -1,5 +1,10 @@
 node_modules/
 dist/
+<<<<<<< HEAD
+package-lock.json
+npm-debug.log
+=======
 coverage/
 package-lock.json
+>>>>>>> c983d933b77f5940816896e4590d56b3dcd0c915
 .DS_Store

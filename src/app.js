@@ -35,7 +35,7 @@ angular.module('hangmanGame', [
 	.factory('sharedUser', function($localForage) {
 		var user = {
 			name: '',
-			lives: 10,
+			lives: 5,
 			isPlaying: false,
 			isLogged: false,
 			score: 0,
