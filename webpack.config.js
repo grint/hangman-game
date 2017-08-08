@@ -111,13 +111,21 @@ module.exports = function makeWebpackConfig() {
 			},
 			{
 				/**
-				 * HTML LOADER
+				 * FILE LOADER
 				 * Copy listed files to output
-				 * Rename files using the asset hash
 				 * Reference: https://github.com/webpack-contrib/file-loader
 				 */
 				test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
 				loader: 'file-loader'
+			},
+			{
+				/**
+				 * PUG LOADER
+				 * Allow loading PUG through JS
+				 * Reference: https://www.npmjs.com/package/pug-html-loader
+				 */
+				test: /\.(pug|jade)$/,
+				use: ['file-loader', 'pug-html-loader?pretty&exports=false']
 			},
 			{
 				/**
@@ -150,7 +158,7 @@ module.exports = function makeWebpackConfig() {
 			jquery: "jquery",
 			Tether: 'tether',
 			tether: 'tether'
-		}),
+		})
 	];
 
 	// Skip rendering index.html in test mode
@@ -170,7 +178,9 @@ module.exports = function makeWebpackConfig() {
 			 * Disabled when in test mode or not in build mode
 			 * Reference: https://github.com/webpack-contrib/extract-text-webpack-plugin
 			 */
-			new ExtractTextPlugin({ filename: 'css/[name].css', disable: !isProd, allChunks: true })
+			new ExtractTextPlugin({ filename: 'css/[name].css', disable: !isProd, allChunks: true }),
+
+			new ExtractTextPlugin({ filename: '[name].html' })
 		)
 	}
 
@@ -190,7 +200,8 @@ module.exports = function makeWebpackConfig() {
 
 			// Copy assets from the public folder
 			// Reference: https://github.com/kevlened/copy-webpack-plugin
-			new CopyWebpackPlugin([{
+			new CopyWebpackPlugin([
+				{
 					from: __dirname + '/src/img',
 					to: __dirname + '/dist/img'
 				},

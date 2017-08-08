@@ -1,0 +1,68 @@
+main
+	h1.text-center.mb-3 Hangman Game
+	
+	.card.bg-faded(ng-hide='vm.sharedUser.isLogged')
+		.card-block(ng-init='selectedTab = 1;')
+			
+			ul.nav.nav-tabs(role='tablist')
+				li.nav-item
+					a.nav-link(href='#', ng-class='{active: selectedTab == 1}', ng-click='selectedTab = 1;', role='tab') Sign Up
+				li.nav-item
+					a.nav-link(href='#', ng-class='{active: selectedTab == 2}', ng-click='selectedTab = 2;', role='tab') Login
+			
+			.tab-content(ng-show='selectedTab == 1')
+				form#newUserForm.mt-3(name='newUserForm', novalidate='', ng-submit='vm.sharedUser.createUser(newUserForm, vm.user)')
+					
+					.form-goup.row(ng-class="{ 'has-error': newUserForm.username.$dirty && newUserForm.username.$error.required }")
+						label.col-sm-2.col-form-label Username:
+						
+						.col-sm-10
+							.input-group
+								input.form-control(type='text', ng-model='vm.user.name', name='username', placeholder='Type your username', ng-model-options='{ debounce: 250 }', required='')
+								span.input-group-btn
+									button.btn.btn-primary(type='submit', ng-disabled='newUserForm.$invalid') Create
+							
+							.alert.alert-danger.mt-2.mb-0(ng-show='newUserForm.$submitted && newUserForm.$userExists')
+								| Username is already taken, choose another name or
+								a(href='', ng-click='selectedTab = 2;') log in
+								| .
+			
+			.tab-content(ng-show='selectedTab == 2')
+				form#loginForm.mt-3(name='loginForm', novalidate='', ng-submit='vm.sharedUser.logIn(loginForm, vm.user)')
+					
+					.form-goup.row(ng-class="{ 'has-error': loginForm.username.$dirty && loginForm.username.$error.required }")
+						label.col-sm-2.col-form-label Username:
+						
+						.col-sm-10
+							.input-group
+								input.form-control(type='text', ng-model='vm.user.name', name='username', placeholder='Type your username', ng-model-options='{ debounce: 250 }', required='')
+								span.input-group-btn
+									button.btn.btn-primary(type='submit', ng-disabled='loginForm.$invalid') Log in
+							
+							.alert.alert-danger.mt-2.mb-0(ng-show='loginForm.$submitted && loginForm.$userNotExists')
+								| User is not exists, check your username or
+								a(href='', ng-click='selectedTab = 1;') sign up
+								| .
+	
+	
+	#game(ng-show='vm.sharedUser.isLogged')
+		p.text-center
+			| Click on the letter in the alphabet below to guess the word, or click "Hint" to get a hint.
+		
+		refresher(condition='gamesCount')
+			#alphabet.d-flex.justify-content-center.flex-wrap
+				span.btn.btn-secondary(ng-repeat='letter in vm.alphabet', ng-click='vm.onLetterClick($event, this);', ng-class="this.clicked ? 'disabled': ''") {{ letter }}
+		
+		#currentWord.d-flex.flex-row.justify-content-center
+			.letter(ng-repeat='letter in vm.game.guesses track by $index') {{ letter }}
+		
+		#message
+			p {{ vm.$scope.message }}
+			button.btn.btn-primary(type='submit', ng-if='vm.game.isSuccessful', ng-click='vm.openLeaderboard()') Open leaderboard
+		
+		#hangman
+			canvas#hangmanCanvas Your browser doesn't support the HTML5 CANVAS tag.
+		
+		#actions
+			button.btn.btn-primary(type='submit', ng-click='vm.sharedUser.logOut();') New user
+			button.btn.btn-primary(type='submit', ng-click='vm.newGame();') New game
