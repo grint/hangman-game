@@ -1,0 +1,22 @@
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top
+	.container
+		button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label='Toggle navigation')
+			span.navbar-toggler-icon
+		
+		a.navbar-brand(ui-sref='hangman') Hangman Game
+		
+		#navbar.collapse.navbar-collapse
+			ul.navbar-nav.mr-auto
+				li.nav-item(ui-sref-active='active')
+					a.nav-link(ui-sref='hangman') Play
+				li.nav-item(ui-sref-active='active')
+					a.nav-link(ui-sref='leaderboard') Leaderboard
+				li.nav-item(ui-sref-active='active')
+					a.nav-link(ui-sref='docs') Docs
+			
+			span.navbar-text.mr-1(ng-if='vm.sharedUser.isLogged')
+				| You are logged in as 
+				strong {{ vm.sharedUser.name }}
+			
+			span.navbar-text(ng-if='vm.sharedUser.isLogged')
+				a(href='#', ng-click='vm.sharedUser.logOut()') Log out

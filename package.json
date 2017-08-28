@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/grint/hangman-game"
   },
   "author": "",
   "license": "MIT",
@@ -45,6 +45,7 @@
     "node-sass": "^4.5.3",
     "null-loader": "^0.1.1",
     "postcss-loader": "1.2.2",
+    "pug-html-loader": "^1.1.5",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
     "sass-loader": "~6.0.6",

@@ -1,10 +1,10 @@
-import template from './hangman.html';
+import template from './hangman.pug';
 import controller from './hangman.controller';
 
 let hangmanComponent = {
 	restrict: 'E',
 	scope: {},
-	template,
+	templateUrl: template,
 	controller,
 	controllerAs: 'vm',
 	bindToController: true

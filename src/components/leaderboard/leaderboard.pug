@@ -1,0 +1,11 @@
+//
+	{{ user = leaderboard._$state.params.obj.user; "" }}
+	{{ game = leaderboard._$state.params.obj.game; "" }}
+main
+	div
+		h1 Leaderboard
+		table.table.scores-table.mt-3(ng-table='vm.tableParams')
+			tr(ng-repeat='(userid, userdata) in $data track by $index')
+				td.text-center(data-title="'Name'", sortable="'name'") {{ userdata.name }}
+				td.text-center(data-title="'Winnings'", sortable="'winnings'") {{ userdata.winnings }}
+				td.text-center(data-title="'Score'", sortable="'score'") {{ userdata.score }}

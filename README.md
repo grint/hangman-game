@@ -62,7 +62,7 @@ hangman-game/
  │   │   ├──component-name/        * Stores all files of a component
  │   │   ├────name.component.js    * Binds template and controller
  │   │   ├────name.controller.js   * Controller with constructor and methods of the component
- │   │   ├────name.html            * HTML template of the component
+ │   │   ├────name.pug             * Pug template of the component
  │   │   ├────name.js              * Generates module
  │   │   └────name.scss            * Component's specific stylesheets
  │   │
@@ -115,6 +115,10 @@ Lets you import HTML as a string through JS.
 **html-webpack-plugin**  
 Renders index.html and injects all assets to it.  
 Reference: [https://github.com/jantimon/html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+
+**pug-html-loader**  
+Renders html templates from pug  
+Reference: [https://www.npmjs.com/package/pug-html-loader](https://www.npmjs.com/package/pug-html-loader)
 
 **ngTable**  
 Pagination, search and sorting for tables.  
