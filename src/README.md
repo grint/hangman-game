@@ -172,9 +172,6 @@ Reference: [https://github.com/webpack/file-loader](https://github.com/webpack/f
 
 
 ### Documentation
-**Mr-Doc**  
-Automatic generation of beautiful documentations  
-Reference: [https://mr-doc.github.io/mr-doc](https://mr-doc.github.io/mr-doc)
 
 **Markdown**  
 Javascript Markdown to HTML converter  
