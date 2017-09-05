@@ -14,6 +14,7 @@ let leaderboardModule = angular.module(MODULE_NAME, [
 				'ngTable'
 		])
 		.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
+				// if the path doesn't match any of the configured urls
 				$urlRouterProvider.otherwise('/');
 
 				$stateProvider

@@ -70,7 +70,7 @@ module.exports = function makeWebpackConfig() {
 		// SourceMap is emitted
 		config.devtool = 'source-map';
 	} else {
-		// SourceMap is added as DataUrl to the eval
+		// Each module is executed with eval and SourceMap is added as DataUrl to the eval
 		config.devtool = 'eval-source-map';
 	}
 
@@ -174,7 +174,7 @@ module.exports = function makeWebpackConfig() {
 			}),
 
 			/**
-			 * Extract css files
+			 * Extract css files into a separate CSS file.
 			 * Disabled when in test mode or not in build mode
 			 * Reference: https://github.com/webpack-contrib/extract-text-webpack-plugin
 			 */
@@ -190,7 +190,7 @@ module.exports = function makeWebpackConfig() {
 	if (isProd) {
 		config.plugins.push(
 			// Only emit files when there are no errors
-			// Reference: http://webpack.github.io/docs/list-of-plugins.html#noemitonerrorsplugin
+			// Reference: https://webpack.js.org/plugins/no-emit-on-errors-plugin
 			new webpack.NoEmitOnErrorsPlugin(),
 
 			// Minify all JavaScript, switch loaders into minimizing mode
@@ -229,11 +229,12 @@ module.exports = function makeWebpackConfig() {
 
 	/**
 	 * Dev server configuration
-	 * Reference: http://webpack.github.io/docs/configuration.html#devserver
+	 * Reference: https://webpack.js.org/configuration/dev-server
+	 * Reference: https://webpack.js.org/configuration/stats/
 	 */
 	config.devServer = {
 		contentBase: './src',
-		stats: 'minimal',
+		stats: 'minimal', // Only output when errors or new compilation happen
 		inline: true,
 		port: parseInt(process.env.PORT) || 3000
 	};

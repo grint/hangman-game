@@ -13,8 +13,7 @@ angular.module('hangmanGame', [
 		uiRouter,
 		LocalForageModule,
 		Common.name,
-		Components.name,
-		// 'btford.markdown'
+		Components.name
 	])
 
 	.config(['$localForageProvider', function($localForageProvider) {
